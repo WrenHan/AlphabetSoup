@@ -1,3 +1,5 @@
+//Wren Hanscom
+//This program will create alphabet soup and then form words in said soup which are related to a company
 public class Soup {
     //these are instance variables 
     private String letters;
@@ -27,37 +29,50 @@ public class Soup {
 
 //below are the functions you'll be writing.
 
-    //adds a word to the pool of letters known as "letters"
+    //Precondition: there is a given word as an input
+    //Postcondition: there is the given word added onto the anything currently stored in the letters string
     public void add(String word){
-
+        letters = letters+word;
     }
 
 
-    //Use Math.random() to get a random character from the letters string and return it.
+    //precondition: there is a character in the letters string
+    //postcondition: a random letter is returned from the string letters
     public char randomLetter(){
-        return 'a';
+        char a = letters.charAt((int)(Math.random()*letters.length()));
+        return a ;
     }
 
 
-    //returns the letters currently stored with the company name placed directly in the center of all
-    //the letters
+    //precondition: there is a company in the company string
+    //postcondition:the letters string is returned with a companies name in the middle of it
     public String companyCentered(){
-        return "";
+        String first = letters.substring(0, ((int)(letters.length()/2)));
+        String last = letters.substring(((int)(letters.length()/2)));
+        return first +company+last;
     }
 
 
-    //should remove the first available vowel from letters. If there are no vowels this method has no effect.
+    //precondition: the letters variable has characters in its string along with one vowel being present among them
+    // postcondition: the first vowel in the letters string is no longer there
     public void removeFirstVowel(){
-        
+        letters = letters.replaceFirst("[aeiouAEIOU]","");
     }
 
-    //should remove "num" letters from a random spot in the string letters. You may assume num never exceeds the length of the string.
+    //Precondition: there is a given number which is no higher then the length of the string letters
+    //postcondition: there is the given number fewer letters stored in letters taken from a random place in the letters string
     public void removeSome(int num){
-
+        int index = (int)(Math.random()*(letters.length()-num));
+        String first2 = letters.substring(0,index);
+        String last2 = letters.substring(index+num, letters.length());
+        letters = first2+last2;
     }
 
-    //should remove the word "word" from the string letters. If the word is not found in letters then it does nothing.
+    //Precondition: there is a given word which exists in the string letters
+    //postcondition: the given word is no longer stored in the string letters.
     public void removeWord(String word){
-        
+        String first3 = letters.substring(0,letters.indexOf(word));
+        String last3 = letters.substring((letters.indexOf(word)+word.length()));
+        letters = first3+last3;
     }
 }
